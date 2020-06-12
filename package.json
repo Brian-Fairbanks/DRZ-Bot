@@ -1,0 +1,32 @@
+{
+  "name": "drz-bot",
+  "version": "1.0.0",
+  "description": "A chat bot for discord enabling a variety of D&D functionality",
+  "main": "server.js",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brian-Fairbanks/DRZ-Bot.git"
+  },
+  "keywords": [
+    "d&d",
+    "dice",
+    "rollerz",
+    "roller",
+    "discord"
+  ],
+  "author": "Brian Fairbanks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brian-Fairbanks/DRZ-Bot/issues"
+  },
+  "homepage": "https://github.com/Brian-Fairbanks/DRZ-Bot#readme"
+}
