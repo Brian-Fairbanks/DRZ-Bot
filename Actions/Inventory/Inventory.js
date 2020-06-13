@@ -81,6 +81,24 @@ function removeItem(room, guild, user, count, name) {
 }
 
 
+function search(room, guild, user, searchTerm){
+  try {
+    let items = invs[guild.id][user.id];
+    let formattedItems = items.map((item, index) => item.name.toLowerCase().includes(searchTerm.toLowerCase())?
+      `#${("000" + index).slice(-3)} - ${item.name} x ${item.count}`
+      :''
+    ).join("\n");
+
+    console.log(formattedItems);
+    return room.send(`\`\`\`${formattedItems ? formattedItems : "Nothing to show"}\`\`\``);
+  }
+  catch (err) {
+    console.error(err)
+    return room.send(`Something went wrong searching ${user}'s Inventory!`)
+  }
+}
+
+
 function printInv(room, user, guild) {
   try {
     let items = invs[guild.id][user.id];
@@ -136,6 +154,17 @@ function process(room, user, guild, args) {
       }
       else {
         room.send(`Something went wrong with removing from ${user}'s Inventory!`)
+      }
+      break;
+    case "s":
+    case "search":
+    case "f":
+    case "find":
+      if(args[2]){
+        search(room, guild, user, args.slice(2).join(" "));
+      }
+      else{
+        room.send(`Search for what?`)
       }
       break;
     default:

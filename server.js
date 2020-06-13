@@ -44,6 +44,7 @@ client.on("message", msg => {
   let command = args[0];
 
   switch(command){
+    case "i":
     case "inv":
       Actions.Inventory.process(returnAddress, msg.author, msg.guild, args);
       break;
