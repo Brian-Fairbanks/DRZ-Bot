@@ -15,7 +15,23 @@
       },
       {
         "name": "medkit",
-        "count": "10"
+        "count": 9
+      },
+      {
+        "name": "knives",
+        "count": 7
+      }
+    ]
+  },
+  "137742888204238848": {
+    "130170863692677120": [
+      {
+        "count": 1,
+        "name": "No Tea"
+      },
+      {
+        "count": 1,
+        "name": "A Splitting Headache"
       }
     ]
   }

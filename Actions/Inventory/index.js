@@ -7,7 +7,7 @@ var invs = {};
 function init() {
   try {
     invs = require("./UserInvs.json");
-    console.log("Inventory read from file", invs);
+    //console.log("Inventory read from file", invs);
   }
   catch{
     writeFile();

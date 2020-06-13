@@ -10,7 +10,7 @@ client.on('ready', () => {
   client.user.setActivity("D&D with friends");
 
   //Load inventory settings from file
-  Actions.Inventory.init();
+  Actions.init();
 
   // client.guilds.cache.forEach(guild => {
   //   console.log(guild.name);
@@ -31,26 +31,7 @@ client.on('ready', () => {
 });
 
 client.on("message", msg => {
-  // ignore messages from myself
-  if (msg.author === client.user){return;}
-  if (msg.content[0]!== '`'){return;}
-
-  //console.log(msg);
-
-  let returnAddress = msg.channel;
-
-  let fullCommand = msg.content.substr(1);
-  let args = fullCommand.split(" ");
-  let command = args[0];
-
-  switch(command){
-    case "i":
-    case "inv":
-      Actions.Inventory.process(returnAddress, msg.author, msg.guild, args);
-      break;
-    default:
-      return;
-  }
+  Actions.process(msg);
 })
 
 client.login(process.env.clientToken);
