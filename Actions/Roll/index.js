@@ -50,48 +50,92 @@ function rollLogic(number, dice) {
 function parse(args){
   // force to lower case
   args = args.toLowerCase();
-  // remove spaces
-  args = args.replace(" ","");
-  // preserve minus, while token 
+  // preserve minus, while tokenizing
   args = args.replace("-","+-")
 
-  const parts = args.split(/[+,; ]/);
+  var parts = args.split(/[+,; ]/);
+  // may create null tokens
+  parts = parts.filter(token => token!='');
   console.log(parts);
 
   let total = 0;
   let dice = [];
 
+  var lastToken = ""
+
   parts.forEach(part => {
     // check if dice roll
-    if (part.includes("d")){
+    if (part.match(/\d*d\d+/gi)){
       console.log(part," - diceRoll");
       let data = part.split("d");
       let results;
 
       results = rollLogic(data[0]?data[0]:1, data[1])
 
-      console.log(part);
-      console.log(results.rolls);
-      console.log(results.sum);
-      console.log ("===============");
+      // console.log(part);
+      // console.log(results.rolls);
+      // console.log(results.sum);
+      // console.log ("===============");
 
-      dice.push(`d${data[1]}:[${results.rolls}]`);
+      dice.push({die:data[1], rolls:results.rolls});
       total += results.sum;
     }
     // otherwise
-    else{
-      if(!isNaN(part)){
+    else if (part.match(/min\d+/gi)){
+      const min = part.replace("min","");
+      dice[dice.length-1].rolls =  dice[dice.length-1].rolls.map(roll => {
+        console.log(roll, min);
+        if (roll >= min){
+          return roll
+        }
+        else{
+          total+=min-roll;
+          return min;
+        }
+      });
+    }
+    else if (part.match(/min+/gi)){
+      lastToken = "min";
+    }
+    else if(!isNaN(part) && lastToken === "min"){
+      lastToken = "";
+      const min = part;
+      dice[dice.length-1].rolls =  dice[dice.length-1].rolls.map(roll => {
+        console.log(roll, min);
+        if (roll >= min){
+          return roll
+        }
+        else{
+          total+=min-roll;
+          return min;
+        }
+      });
+    }
+    else if(!isNaN(part)){
         console.log(part," - number");
         total+= parseInt(part);
-      }
-      else{
-        console.log(part," - stat");
-      }
     }
-  })
+    else{
+      console.log(part," - stat");
+      switch(part){
+        case "s":
+        case "sa":
+        case "sasc":
+        case "sort":
+        case "sorta":
+        case "sortasc":
+          if(dice.length >= 1){
+            dice[dice.length-1].rolls = dice[dice.length-1].rolls.sort((a,b)=>a-b);
+            dice[dice.length-1].modified="Sorted"
+          }
+        }
+      }
+    })
 
-  console.log(`Rolls:${dice}\nTotal:${total}`);
-  return {dice, total}
+  let formattedDice = dice.map(set => `d${set.die}${set.modified?` ${set.modified}`:""}:[${set.rolls}]`)
+
+  console.log(`Rolls:${formattedDice}\nTotal:${total}`);
+  return {dice:formattedDice, total}
 }
 
 
@@ -110,7 +154,7 @@ function process(room, user, guild, args) {
   // Normal Roll
   if(type==="normal"){
     const {dice, total} = parse(fullExpr)
-    room.send(`\`\`\`Total:${total}\n${dice.join("  ")}\`\`\``);
+    room.send(`\`\`\`#${total}\n${dice.join("  ")}\`\`\``);
   }
   // Advantage Roll
   else if(type==="adv" || type ==="dis"){
