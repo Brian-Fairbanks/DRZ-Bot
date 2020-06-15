@@ -23,7 +23,8 @@ function userInit(guild, user) {
 
   //need to setup user for the first time?
   if (invs[guild.id][user.id] === undefined) {
-    invs[guild.id][user.id] = [{ count: 1, name: "No Tea" }, { count: 1, name: "A Splitting Headache" }];
+    invs[guild.id][user.id] = [];
+    //invs[guild.id][user.id] = [{ count: 1, name: "No Tea" }, { count: 1, name: "A Splitting Headache" }];
   }
 }
 

@@ -3,7 +3,7 @@
     "130170863692677120": [
       {
         "name": "gold",
-        "count": "124"
+        "count": 604
       },
       {
         "name": "golden egg",
@@ -20,6 +20,58 @@
       {
         "name": "knives",
         "count": 7
+      },
+      {
+        "name": "item01",
+        "count": 1
+      },
+      {
+        "name": "item02",
+        "count": 1
+      },
+      {
+        "name": "item03",
+        "count": 1
+      },
+      {
+        "name": "item04",
+        "count": 1
+      },
+      {
+        "name": "item05",
+        "count": 1
+      },
+      {
+        "name": "item06",
+        "count": 1
+      },
+      {
+        "name": "item07",
+        "count": 1
+      },
+      {
+        "name": "item09",
+        "count": 1
+      },
+      {
+        "name": "item10",
+        "count": 1
+      },
+      {
+        "name": "item12",
+        "count": 1
+      },
+      {
+        "name": "item13",
+        "count": 1
+      },
+      {
+        "name": "item14",
+        "count": 1
+      },
+      {
+        "name": "golden hand",
+        "count": 1
       }
     ]
   },
@@ -32,6 +84,198 @@
       {
         "count": 1,
         "name": "A Splitting Headache"
+      }
+    ]
+  },
+  "713238647159128119": {
+    "130170863692677120": [
+      {
+        "name": "full plate",
+        "count": 1
+      },
+      {
+        "name": "shield +1",
+        "count": 1
+      },
+      {
+        "name": "morning star",
+        "count": 1
+      },
+      {
+        "name": "healers kit",
+        "count": 10
+      },
+      {
+        "name": "candle",
+        "count": 9
+      },
+      {
+        "name": "chalk",
+        "count": "10"
+      },
+      {
+        "name": "climbers kit",
+        "count": 1
+      },
+      {
+        "name": "rope 300",
+        "count": 1
+      },
+      {
+        "name": "explorers pack",
+        "count": 1
+      },
+      {
+        "name": "bedroll",
+        "count": 1
+      },
+      {
+        "name": "messkit",
+        "count": 1
+      },
+      {
+        "name": "torches",
+        "count": "10"
+      },
+      {
+        "name": "rations",
+        "count": "10"
+      },
+      {
+        "name": "waterskin",
+        "count": 1
+      },
+      {
+        "name": "dice set",
+        "count": 1
+      },
+      {
+        "name": "ring of haste",
+        "count": 1
+      },
+      {
+        "name": "caltrops",
+        "count": "5"
+      },
+      {
+        "name": "jet black wizards hat",
+        "count": 1
+      },
+      {
+        "name": "epic poetry",
+        "count": 1
+      },
+      {
+        "name": "tinder box",
+        "count": 1
+      },
+      {
+        "name": "gold 890",
+        "count": 1
+      },
+      {
+        "name": "rope 50",
+        "count": 1
+      },
+      {
+        "name": "royal jelly",
+        "count": "2"
+      }
+    ],
+    "202074786916990978": [
+      {
+        "name": "gold",
+        "count": "1001662215161515615611156651"
+      }
+    ],
+    "176176872093253633": [
+      {
+        "name": "gold",
+        "count": "675"
+      },
+      {
+        "name": "arrows",
+        "count": "108"
+      },
+      {
+        "name": "Javelins",
+        "count": "10"
+      },
+      {
+        "name": "Healing Potion",
+        "count": 1
+      },
+      {
+        "name": "Superior Healing Potion",
+        "count": 1
+      },
+      {
+        "name": "Climbing Potion",
+        "count": 1
+      },
+      {
+        "name": "Glass Bottles",
+        "count": "2"
+      },
+      {
+        "name": "McRee's Gloves (+2 DEX Ranged Attack)",
+        "count": 1
+      },
+      {
+        "name": "Stags",
+        "count": "4"
+      },
+      {
+        "name": "Adamantine Half Plate (barded)",
+        "count": 1
+      },
+      {
+        "name": "Masterwork Shield",
+        "count": 1
+      },
+      {
+        "name": "Artillerist's Bow",
+        "count": 1
+      },
+      {
+        "name": "Bedroll",
+        "count": 1
+      },
+      {
+        "name": "Healer's Kit (8 remaining uses)",
+        "count": 1
+      },
+      {
+        "name": "Principles of Political Economy and Taxation",
+        "count": 1
+      },
+      {
+        "name": "Alchemy Jug",
+        "count": 1
+      },
+      {
+        "name": "Buchels of various berries",
+        "count": "2"
+      },
+      {
+        "name": "Oil of Etherealness",
+        "count": 1
+      },
+      {
+        "name": "Cult Knife (VOID)",
+        "count": 1
+      },
+      {
+        "name": "pairs of Morbounder Tusks",
+        "count": "19"
+      },
+      {
+        "name": "candles",
+        "count": "25"
+      },
+      {
+        "name": "Foot Hemp Rope x2",
+        "count": "50"
       }
     ]
   }

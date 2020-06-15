@@ -31,7 +31,7 @@ client.on('ready', () => {
 });
 
 client.on("message", msg => {
-  Actions.process(msg);
+  Actions.process(msg, client);
 })
 
 client.login(process.env.clientToken);

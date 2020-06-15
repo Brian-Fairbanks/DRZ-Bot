@@ -8,7 +8,7 @@ function init(){
 }
 
 // Process message
-function process(){  // ignore messages from myself
+function process(msg, client){  // ignore messages from myself
   if (msg.author === client.user){return;}
   if (msg.content[0]!== '`'){return;}
 
