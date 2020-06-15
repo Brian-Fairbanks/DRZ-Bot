@@ -83,16 +83,19 @@ function parse(args){
     // otherwise
     else if (part.match(/min\d+/gi)){
       const min = part.replace("min","");
-      dice[dice.length-1].rolls =  dice[dice.length-1].rolls.map(roll => {
-        console.log(roll, min);
-        if (roll >= min){
-          return roll
-        }
-        else{
-          total+=min-roll;
-          return min;
-        }
-      });
+      if(dice.length > 0){
+        dice[dice.length-1].modified = `>=${min}`;
+        dice[dice.length-1].rolls =  dice[dice.length-1].rolls.map(roll => {
+          console.log(roll, min);
+          if (roll >= min){
+            return roll
+          }
+          else{
+            total+=min-roll;
+            return min;
+          }
+        });
+      }
     }
     else if (part.match(/min+/gi)){
       lastToken = "min";
@@ -100,16 +103,19 @@ function parse(args){
     else if(!isNaN(part) && lastToken === "min"){
       lastToken = "";
       const min = part;
-      dice[dice.length-1].rolls =  dice[dice.length-1].rolls.map(roll => {
-        console.log(roll, min);
-        if (roll >= min){
-          return roll
-        }
-        else{
-          total+=min-roll;
-          return min;
-        }
-      });
+      if(dice.length > 0){
+        dice[dice.length-1].modified = `>=${min}`;
+        dice[dice.length-1].rolls =  dice[dice.length-1].rolls.map(roll => {
+          console.log(roll, min);
+          if (roll >= min){
+            return roll
+          }
+          else{
+            total+=min-roll;
+            return min;
+          }
+        });
+      }
     }
     else if(!isNaN(part)){
         console.log(part," - number");
