@@ -88,7 +88,7 @@ function search(room, guild, user, searchTerm){
     let formattedItems = items.map((item, index) => item.name.toLowerCase().includes(searchTerm.toLowerCase())?
       `#${("000" + index).slice(-3)} - ${item.name} x ${item.count}`
       :''
-    ).join("\n");
+    ).filter(entry => entry!=='').join("\n");
 
     console.log(formattedItems);
     return room.send(`\`\`\`${formattedItems ? formattedItems : "Nothing to show"}\`\`\``);
