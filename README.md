@@ -8,6 +8,8 @@ DiceRollerz Discord Bot
 - Running off my last project, Dice Rollers, I decided that I did not need to recreate the wheel and develop my own full functioned chat system
 - I have instead decided to convert my ideas from that project, and instead make a chat bot for discord that would handle the same kind of server based commands
 
+- Install Link - [https://discord.com/api/oauth2/authorize?client_id=721069394221858977&permissions=0&scope=bot](https://discord.com/api/oauth2/authorize?client_id=721069394221858977&permissions=0&scope=bot)
+
 
 ## Table of Contents
 * [License](#license)
@@ -63,6 +65,8 @@ Manually tested.  No additinal frameworks used.
 - `r adv [roll] - `r adv d20+4
 
 ### Not Yet Implemented
+- Character Sheets
+- custom commands
 
 ## Contributing
 * [Brian Fairbanks](https://github.com/Brian-Fairbanks)
