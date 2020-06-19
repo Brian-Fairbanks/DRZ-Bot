@@ -52,6 +52,8 @@ function parse(args){
   args = args.toLowerCase();
   // preserve minus, while tokenizing
   args = args.replace("-","+-")
+  args = args.replace("*","+*")
+  args = args.replace("/","+/")
 
   var parts = args.split(/[+,; ]/);
   // may create null tokens
@@ -65,20 +67,42 @@ function parse(args){
 
   parts.forEach(part => {
     // check if dice roll
-    if (part.match(/\d*d\d+/gi)){
+    if (part.match(/\d*d\d+/gi) || 
+    part.slice(1).match(/\d*d\d+/gi)){
+      //plus by defaul
+      let operation="+"
+
+      //unless the first character is somethign else.
+      if(["-","*","/"].includes(part[0])){
+        operation = part[0];
+        part=part.slice(1);
+      }
+
       console.log(part," - diceRoll");
       let data = part.split("d");
       let results;
 
       results = rollLogic(data[0]?data[0]:1, data[1])
 
-      // console.log(part);
-      // console.log(results.rolls);
-      // console.log(results.sum);
-      // console.log ("===============");
+      console.log(part);
+      console.log(results.rolls);
+      console.log(results.sum);
+      console.log ("===============");
 
       dice.push({die:data[1], rolls:results.rolls});
-      total += results.sum;
+      switch(operation){
+        case "-":
+          total -= results.sum;
+          break;
+        case "*":
+          total *= results.sum;
+          break;
+        case "/":
+          total /= results.sum;
+          break;
+        default:
+          total += results.sum;
+      }
     }
     // otherwise
     else if (part.match(/min\d+/gi)){
