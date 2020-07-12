@@ -1,6 +1,7 @@
 // Import all Actions
 const Inventory = require('./Inventory')
 const Rolls = require('./Roll')
+const Test = require('./Test')
 
 // Initializing data strcuctures...
 function init(){
@@ -28,6 +29,10 @@ function process(msg, client){  // ignore messages from myself
     case "r":
     case "roll":
       Rolls.process(returnAddress, msg.author, msg.guild, args);
+      break;
+    case "test":
+    case "t":
+      Test.process(returnAddress, msg.author, msg.guild, args);
       break;
     default:
       return;
