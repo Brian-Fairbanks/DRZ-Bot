@@ -14,10 +14,12 @@ function process(room, user, guild, args) {
   });
 
   let shunted = shunting(results);
-  console.log(shunted);
+  console.log("Shunted: "+shunted);
 
   let final = postFix(shunted);
   console.log(final);
+
+  room.send(`\`\`\`# ${final.result}\n[${JSON.stringify(final.rolls)}]\n\n(${shunted})\`\`\``);
 
 }
 
@@ -49,43 +51,52 @@ function tokenize(str) {
 }
 
 function getTokens(str) {
+
   var tokens = [];
   var nextToken = "";
   var lastToken = "";
+  console.log(tokens);
+
+  function tokenPush(){
+    if(lastToken == 'd' && (tokens.length == 0 || isNaN(tokens[tokens.length-1])) ){tokens.push(1); console.log("got you fam!")}
+    tokens.push(lastToken);
+    lastToken = '';
+  }
+
   for (x = 0; x < str.length; x++) {
 
     if (isDigit(str[x]) || isDecimal(str[x])) {
       nextToken += str[x];
-      if (lastToken !== '') { tokens.push(lastToken); lastToken = ''; }
+      if (lastToken !== '') { tokenPush(); }
     }
 
     if (isLetter(str[x])) {
-      tokens.push(nextToken);
+      if(nextToken) {tokens.push(nextToken);}
       nextToken = '';
       lastToken += str[x];
     }
 
     if (isOperator(str[x])) {
       if (nextToken !== '') { tokens.push(nextToken); nextToken = ''; }
-      if (lastToken !== '') { tokens.push(lastToken); lastToken = ''; }
+      if (lastToken !== '') { tokenPush(); }
       tokens.push(str[x]);
     }
 
     if (isLeftParenthesis(str[x])) {
       if (nextToken !== '') { tokens.push(nextToken); nextToken = ''; tokens.push("*") }
-      if (lastToken !== '') { tokens.push(lastToken); lastToken = ''; }
+      if (lastToken !== '') { tokenPush(); }
       tokens.push(str[x]);
     }
 
     if (isRightParenthesis(str[x])) {
       if (nextToken !== '') { tokens.push(nextToken); nextToken = ''; }
-      if (lastToken !== '') { tokens.push(lastToken); lastToken = ''; }
+      if (lastToken !== '') { tokenPush(); }
       tokens.push(str[x]);
     }
 
     if (isComma(str[x])) {
       if (nextToken !== '') { tokens.push(nextToken); nextToken = ''; }
-      if (lastToken !== '') { tokens.push(lastToken); lastToken = ''; }
+      if (lastToken !== '') { tokenPush(); }
       tokens.push(str[x]);
     }
 
@@ -95,6 +106,7 @@ function getTokens(str) {
       nextToken = '';
     }
   }
+  console.log("======== Done Tokenizing! ============")
   return tokens;
 }
 
@@ -119,7 +131,7 @@ function shunting(arr) {
     }
 
     else if (token.type === 'Function') {
-      ops.push(token.value)
+      output.push(token.value)
     }
 
     else if (token.type === 'Operator') {
@@ -150,7 +162,7 @@ function shunting(arr) {
     }
 
     // show step
-    // console.log(`${output} : ${rops.reverse().join(" ")}`)
+    console.log(`${output} : ${rops.reverse().join(" ")}`)
 
   })
   while(ops.length > 0){
@@ -177,9 +189,42 @@ function getStats(char) {
 
 function postFix(eval){
   let result = [];
+  let rolls = [];
+  let toPreform = ''
+
   eval.forEach(token => {
-    if (isDigit(token)){
+    if (!isNaN(token)){
       result.push(token)
+
+      if(toPreform){
+        switch(toPreform){
+          case "roll":
+            let x2 = result.pop();
+            let x1 = result.pop();
+            console.log(`rolling ${x1} d${x2}s`)
+            let roll = rollLogic(x1, x2)
+            console.log(roll);
+            result.push(roll.sum);
+            rolls.push({die:x2, rolls:roll.rolls});
+            toPreform = '';
+            break;
+          case "min":
+            if(rolls.length > 0){
+              let min = result.pop();
+              rolls[rolls.length-1].modified = `>=${min}`;
+              rolls[rolls.length-1].rolls =  rolls[rolls.length-1].rolls.map(roll => {
+                console.log(roll, min);
+                if (roll >= min){
+                  return roll
+                }
+                else{
+                  result[result.length-1]+=min-roll;
+                  return min;
+                }
+              });
+            }
+        }
+      }
     }
 
     else if(isOperator(token)){
@@ -199,13 +244,36 @@ function postFix(eval){
           result.push(x1*x2);
           break;
         case "^":
-          result.push(x1^x2);
+          result.push(Math.pow(x1,x2));
           break;
       }
     }
-    console.log(result);
+
+    else{
+      switch(token){
+        case "d":
+          toPreform = "roll";
+          break;
+        case "min":
+          toPreform = "min"
+          break;
+      }
+    }
+
+    //console.log(result);
   })
-  return result;
+  return {result, rolls};
+}
+
+function rollLogic(number, dice) {
+  const rolls = []
+  var sum = 0;
+  for (i = 0; i < number; i++){
+    const roll = 1+Math.floor(Math.random()*dice);
+    rolls.push(roll);
+    sum+=roll;
+  }
+  return {rolls,sum};
 }
 
 
